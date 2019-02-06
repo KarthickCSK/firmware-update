@@ -22,28 +22,37 @@ export default class FileUpload extends Component {
   }
 
   uploadFirmware = () => {
-    this.setState({ uploadFirmwareLoading: true });
-    const formData = new FormData();
-    formData.append("firmare", this.state.selectedFile);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data"
-      }
-    };
-    axios
-      .post(REACT_APP_SERVER + REACT_APP_UPLOADBLOB, formData, config)
-      .then(response => {
-        console.log("ki", response);
-        this.setState({ uploadFirmwareLoading: false });
-        if (response.data.status) {
-          this.getBlobDetails();
-        } else {
+    if (this.state.selectedFile) {
+      this.setState({ uploadFirmwareLoading: true });
+      const formData = new FormData();
+      formData.append("firmare", this.state.selectedFile);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data"
         }
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({ uploadFirmwareLoading: false });
-      });
+      };
+      axios
+        .post(REACT_APP_SERVER + REACT_APP_UPLOADBLOB, formData, config)
+        .then(response => {
+          console.log("ki", response);
+          this.setState({ uploadFirmwareLoading: false });
+          if (response.data.status) {
+            alert(response.data.message);
+            this.getBlobDetails();
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Error in upload");
+          this.setState({ uploadFirmwareLoading: false });
+        });
+      document.getElementById("file").value = "";
+      this.setState({ selectedFile: null });
+    } else {
+      alert("Please select a file");
+    }
   };
 
   getBlobDetails = () => {
@@ -69,13 +78,13 @@ export default class FileUpload extends Component {
       <tr key={index}>
         <th scope="row">{index + 1}</th>
         <td>{blob.name}</td>
-        <td>{blob.creationTime}</td>
+        <td>{blob.lastModified}</td>
       </tr>
     );
   };
   handleselectedFile = event => {
     event.preventDefault();
-    this.setState({selectedFile: event.target.files[0]})
+    this.setState({ selectedFile: event.target.files[0] });
   };
   render() {
     const { blobs, getBlobsLoading } = this.state;
@@ -84,19 +93,15 @@ export default class FileUpload extends Component {
         <div className="upload-container">
           <div className="input-group mb-3">
             <div className="custom-file">
+              <b>Select a file:</b>&nbsp;
               <input
+                id="file"
                 type="file"
-                className="custom-file-input"
-                id="inputGroupFile02"
                 onChange={this.handleselectedFile}
+                name="myFile"
               />
-              <label
-                className="custom-file-label"
-                htmlFor="inputGroupFile02"
-                aria-describedby="inputGroupFileAddon02"
-              >
-                Select firmware file...
-              </label>
+              <br />
+              <br />
             </div>
             <div className="input-group-append">
               <button
@@ -115,7 +120,7 @@ export default class FileUpload extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Firmware name</th>
-                <th scope="col">Date uploaded</th>
+                <th scope="col">Date uploaded / Modified</th>
               </tr>
             </thead>
             <tbody>

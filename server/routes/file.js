@@ -68,7 +68,7 @@ router.post("/upload", (req, res) => {
                   } else {
                     //console.log(result, response);
                     res.status(201).json({
-                      message: `File uploaded in blob : dhluc3store/${keys.containerName}`,
+                      message: `File uploaded in blob : ${keys.blobAccountName}/${keys.containerName}`,
                       data: result,
                       status: true
                     });
