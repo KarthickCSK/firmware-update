@@ -1,0 +1,35 @@
+.card-container {
+  font-size: 14px;
+  margin: 10px auto;
+  width: 40%;
+}
+.img-upload {
+  width: 36px;
+  height: 36px;
+  margin: auto 12px;
+  cursor: pointer;
+}
+.modal-header {
+  padding: 10px 10px;
+}
+.upload-text {
+  margin: 0px;
+}
+
+.close-firm, .send-firm, .upload-firm {
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  margin-right: 10px !important;
+}
+.cust-btn {
+  color: white;
+  background-color: #2c55ba;
+  border: none;
+  padding: 5px 12px;
+  cursor: pointer;
+  margin-right: 20px !important;
+}
+.modal-footer > :only-child {
+  margin-right: 20px
+}
