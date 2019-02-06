@@ -97,6 +97,7 @@ export default class FileUpload extends Component {
               <input
                 id="file"
                 type="file"
+                accept=".gz, .zip"
                 onChange={this.handleselectedFile}
                 name="myFile"
               />
