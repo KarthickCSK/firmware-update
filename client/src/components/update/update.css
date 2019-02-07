@@ -1,0 +1,7 @@
+.status-container {
+  display: flex;
+  margin-right: 12px;
+}
+.status-details-container {
+  width: 380px;
+}

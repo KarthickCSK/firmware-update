@@ -16,7 +16,7 @@
   margin: 0px;
 }
 
-.close-firm, .send-firm, .upload-firm {
+.close-firm, .send-firm, .upload-firm, .refresh-firm {
   height: 32px;
   width: 32px;
   cursor: pointer;
