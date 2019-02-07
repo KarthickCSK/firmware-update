@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import UploadTwin from '../uploadTwin/uploadTwin';
 import './update.css'
 import StyledProgressbar from '../common/styledProgressBar';
 const {
   REACT_APP_VM_SERVER,
-  REACT_APP_GETSTATUS
+  REACT_APP_GETSTATUS,
 } = process.env;
 export default class Update extends Component {
   constructor(props) {
@@ -84,36 +85,37 @@ export default class Update extends Component {
     const { firmwareStatuses, getFirmwareLoading } = this.state;
     return (
       <div className="container">
-        <div className="card-container">
-          <div className="card">
-            <div className="card-body">
-              <div className="row">
-                <img className="img-upload" src={require('./play.svg')} alt="..." data-toggle="modal" data-target="#showFirmwareDetails"/>
-                <p className="col-10 upload-text">
-                  <b>Firmware update: </b> Updates device Firmware. Use parameter FwPackageUri to specify the URI of the firmware file
-                </p>
+        <div className="row">
+          <div className="col-4">
+            <UploadTwin />
+          </div>
+          <div className="col-4">
+            <div className="card-container">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row" style={{'cursor':'pointer'}} data-toggle="collapse" href="#toggleFirmware" role="button" aria-expanded="false" aria-controls="toggleFirmware">
+                    <img className="img-upload" src={require('./play.svg')} alt="..." data-toggle="modal" data-target="#showFirmwareDetails"/>
+                    <p className="col-10 upload-text">
+                      Update firmware
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="modal fade" id="showFirmwareDetails" tabIndex="-1" role="dialog" aria-labelledby="showFirmwareDetails" aria-hidden="true">
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalCenterTitle">Firmware update</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                {firmwareStatuses.map((status, index)=>this.showStatus(status, index))}
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="cust-btn">View Logs</button>
-                <img className="refresh-firm" src={require('./refresh.svg')} title="refresh" alt="..." onClick={this.getStatus}/>
-                <img className="close-firm" src={require('./close.svg')} title="close" alt="..." />
-                <img className="upload-firm" src={require('./upload.svg')} title="upload" alt="..." />
-                <img className="send-firm" src={require('./send.svg')} title="send" alt="..." />
+            <div>
+              <div className="collapse multi-collapse" id="toggleFirmware">
+                <div className="card firm-card">
+                  <div className="card-body">
+                    {firmwareStatuses.map((status, index)=>this.showStatus(status, index))}
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="cust-btn">View Logs</button>
+                    <img className="refresh-firm" src={require('./refresh.svg')} title="refresh" alt="..." onClick={this.getStatus}/>
+                    {/* <img className="close-firm" src={require('./close.svg')} title="close" alt="..." />
+                    <img className="upload-firm" src={require('./upload.svg')} title="upload" alt="..." />
+                    <img className="send-firm" src={require('./send.svg')} title="send" alt="..." /> */}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

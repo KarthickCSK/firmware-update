@@ -10,7 +10,7 @@ const blobServiceWithoutSas = storage.createBlobService(keys.connectionStr);
 router.get("/list", (req, res) => {
   blobServiceWithoutSas.listBlobsSegmented(keys.containerName, null, (err, data) => {
     if (err) {
-      res.json({ data: [], status: true, err:err });
+      res.json({ blobs: [], status: true, err:err });
     } else {
       res.json({ message: `${data.entries.length} blob(s) in '${keys.containerName}'`, status:true, blobs: data.entries });
     }
@@ -44,6 +44,7 @@ router.post("/upload", (req, res) => {
       );
       blobServiceWithoutSas.createContainerIfNotExists(
         keys.containerName,
+        {publicAccessLevel : 'blob'},
         (error, container) => {
           if (error) {
             console.log("Error creating blob container: ", error);

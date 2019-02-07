@@ -78,7 +78,9 @@ export default class FileUpload extends Component {
       <tr key={index}>
         <th scope="row">{index + 1}</th>
         <td>{blob.name}</td>
-        <td>{blob.lastModified}</td>
+        <td>
+          <span className={`blob-${index}`}>{`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${blob.name}`}</span>
+        </td>
       </tr>
     );
   };
@@ -121,7 +123,7 @@ export default class FileUpload extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Firmware name</th>
-                <th scope="col">Date uploaded / Modified</th>
+                <th scope="col">Download URL</th>
               </tr>
             </thead>
             <tbody>
