@@ -4,46 +4,55 @@ import "./uploadTwin.css";
 const { REACT_APP_VM_SERVER, REACT_APP_UPDATE_TWIN } = process.env;
 
 export default class UploadTwin extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       softwareVersion: "1.0.0.006",
       updateTwinLoading: false,
-      url: "https://wrdm2chetanpackage.blob.core.windows.net/wrdm2-package-file-chetan/package.tar.gz"
-    }
+      url:
+        "https://wrdm2chetanpackage.blob.core.windows.net/wrdm2-package-file-chetan/package.tar.gz"
+    };
   }
-  updateTwin = (e) => {
+  updateTwin = e => {
     e.preventDefault();
     const { softwareVersion, url } = this.state;
-    if(softwareVersion === "" || url === ""){
-      alert ('Please enter all the fields')
-    }else{
-      this.setState({updateTwinLoading:true});
+    if (softwareVersion === "" || url === "") {
+      alert("Please enter all the fields");
+    } else {
+      this.setState({ updateTwinLoading: true });
       axios({
         method: "post",
-        url: REACT_APP_VM_SERVER + REACT_APP_UPDATE_TWIN,
-        headers: { "Allow-Control-Allow-Origin": "*", "Content-Type": "application/json"},
+        url: REACT_APP_VM_SERVER + REACT_APP_UPDATE_TWIN ,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers":"Authorization, Content-Type",
+          "Access-Control-Allow-Methods": "POST"
+        },
         data: {
-          "software_version":softwareVersion,
-          "url":url
+          software_version: softwareVersion,
+          url: url
         }
       })
-      .then(response => {
-        console.log(response);
-        this.setState({ updateTwinLoading: false });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ updateTwinLoading: false });
-      });
+        .then(response => {
+          console.log(response);
+          this.setState({ updateTwinLoading: false });
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({ updateTwinLoading: false });
+        });
     }
-  }
-  handleInput = (e) => {
+  };
+  handleInput = e => {
     const { name, value } = e.target;
-    if(name==='url'){this.setState({url: value});}
-    if(name==='softwareVersion'){this.setState({softwareVersion: value});}
-    
-  }
+    if (name === "url") {
+      this.setState({ url: value });
+    }
+    if (name === "softwareVersion") {
+      this.setState({ softwareVersion: value });
+    }
+  };
   render() {
     const { url, softwareVersion } = this.state;
     return (
@@ -74,7 +83,9 @@ export default class UploadTwin extends Component {
               onChange={this.handleInput}
             />
           </div>
-          <button type="submit" className="cust-btn">Update twin</button>
+          <button type="submit" className="cust-btn">
+            Update twin
+          </button>
         </form>
       </div>
     );
