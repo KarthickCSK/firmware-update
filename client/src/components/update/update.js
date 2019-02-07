@@ -8,13 +8,7 @@ export default class Update extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firmwareStatuses: [
-        {
-          otaStatus: "SoftwareUpdateComplete",
-          currentVersion: "1.0.0.006",
-          pendingVersion: ""
-        }
-      ],
+      firmwareStatuses: [],
       getFirmwareLoading: false
     };
   }

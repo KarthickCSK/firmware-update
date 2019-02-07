@@ -36,10 +36,12 @@ export default class UploadTwin extends Component {
       })
         .then(response => {
           console.log(response);
+          alert('Firmware updated successfully')
           this.setState({ updateTwinLoading: false });
         })
         .catch(err => {
           console.log(err);
+          alert('Erro in Firmware update')
           this.setState({ updateTwinLoading: false });
         });
     }
