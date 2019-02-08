@@ -24,7 +24,7 @@ router.post("/upload", (req, res) => {
       callback(null, "./server/storage/");
     },
     filename: function(req, file, callback) {
-      callback(null, path.extname(file.originalname));
+      callback(null, file.originalname);
     }
   });
   
