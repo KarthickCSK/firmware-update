@@ -10,7 +10,7 @@ const {
   REACT_APP_UPLOADBLOB
 } = process.env;
 const columns = [{
-  Header: 'name',
+  Header: 'Name',
   accessor: 'name' // String-based value accessors!
 }, {
   Header: 'Download Link',
