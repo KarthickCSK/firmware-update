@@ -11,3 +11,16 @@
 .firm-card {
   margin: auto;
 }
+
+.update-row {
+  border-style: solid;
+  border-width: 1px;
+  padding: 14px 0px;
+  margin: 0px;
+}
+.toggle-card {
+  margin: 0px !important;
+}
+.toogle-footer {
+  padding: 5px
+}

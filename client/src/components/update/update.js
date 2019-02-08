@@ -86,15 +86,15 @@ export default class Update extends Component {
   render() {
     const { firmwareStatuses, getFirmwareLoading } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-4">
+      <div>
+        <div className="row update-row">
+          <div className="col-6">
             <UploadTwin />
           </div>
           <div className="col-6">
             <div className="accordion" id="accordionExample">
               <div className="card">
-                <div className="card-header" id="headingOne">
+                <div className="card-header toggle-card" id="headingOne">
                   <div
                     className="row"
                     style={{ cursor: "pointer" }}
@@ -118,21 +118,17 @@ export default class Update extends Component {
                   <div className="collapse multi-collapse" id="toggleFirmware">
                     <div className="card firm-card">
                       <div className="card-body">
-                        {firmwareStatuses.map((status, index) =>
+                        {firmwareStatuses.length?firmwareStatuses.map((status, index) =>
                           this.showStatus(status, index)
-                        )}
+                        ):<p style={{'text-align': 'center'}}>No records found</p>}
                       </div>
-                      <div className="modal-footer">
+                      <div className="toogle-footer">
                         <button type="button" className="cust-btn">
                           View Logs
                         </button>
-                        <img
-                          className="refresh-firm"
-                          src={require("./refresh.svg")}
-                          title="refresh"
-                          alt="..."
-                          onClick={this.getStatus}
-                        />
+                        <button type="button" className="cust-btn" onClick={this.getStatus}>
+                          {getFirmwareLoading?'Refreshing..':'Refresh'}
+                        </button>
                         {/* <img
                           className="close-firm"
                           src={require("./close.svg")}

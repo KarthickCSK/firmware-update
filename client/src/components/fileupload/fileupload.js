@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import Update from "../update/update";
 import axios from "axios";
+import ReactTable from "react-table";
+import 'react-table/react-table.css'
 import "./fileupload.css";
 const {
   REACT_APP_SERVER,
   REACT_APP_GETBLOBS,
   REACT_APP_UPLOADBLOB
 } = process.env;
+const columns = [{
+  Header: 'name',
+  accessor: 'name' // String-based value accessors!
+}, {
+  Header: 'Download Link',
+  accessor: 'name',
+  Cell: props => <span className='number'>{`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${props.value}`}</span> // Custom cell components!
+}]
 export default class FileUpload extends Component {
   constructor(props) {
     super(props);
@@ -76,7 +86,6 @@ export default class FileUpload extends Component {
   showBlob = (blob, index) => {
     return (
       <tr key={index}>
-        <th scope="row">{index + 1}</th>
         <td>{blob.name}</td>
         <td>
           <span className={`blob-${index}`}>{`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${blob.name}`}</span>
@@ -91,11 +100,23 @@ export default class FileUpload extends Component {
   render() {
     const { blobs, getBlobsLoading } = this.state;
     return (
-      <div>
+      <div className="container cust-home">
+        <label><b>Firmwares in blob: </b></label>
+        <ReactTable
+          data={blobs}
+          columns={columns}
+          loading={getBlobsLoading}
+          showPagination={true}
+          defaultPageSize={3}
+          resizable={true}
+          sortable={false}
+          loadingText={'Fetching firmwares..'}
+          noDataText={'No Firmwares found..'}
+        />
         <div className="upload-container">
+        <label><b>Upload Firmware file to blob: </b></label>
           <div className="input-group mb-3">
             <div className="custom-file">
-              <b>Select a file:</b>&nbsp;
               <input
                 id="file"
                 type="file"
@@ -116,21 +137,6 @@ export default class FileUpload extends Component {
               </button>
             </div>
           </div>
-        </div>
-        <div className="table-container">
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Firmware name</th>
-                <th scope="col">Download URL</th>
-              </tr>
-            </thead>
-            <tbody>
-              {!getBlobsLoading &&
-                blobs.map((blob, index) => this.showBlob(blob, index))}
-            </tbody>
-          </table>
         </div>
         <Update />
       </div>
