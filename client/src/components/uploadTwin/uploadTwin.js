@@ -86,7 +86,7 @@ export default class UploadTwin extends Component {
             />
           </div>
           <button type="submit" className="cust-btn">
-            Update twin
+            Update firmware
           </button>
         </form>
       </div>

@@ -111,7 +111,7 @@ export default class Update extends Component {
                       data-toggle="modal"
                       data-target="#showFirmwareDetails"
                     />
-                    <p className="col-10 upload-text">Update firmware</p>
+                    <p className="col-10 upload-text">Status</p>
                   </div>
                 </div>
                 <div>
