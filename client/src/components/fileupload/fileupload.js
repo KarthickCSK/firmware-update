@@ -114,6 +114,7 @@ export default class FileUpload extends Component {
                 <ReactTable
                   data={blobs}
                   columns={columns}
+                  pageSizeOptions={[3]}
                   loading={getBlobsLoading}
                   showPagination={true}
                   defaultPageSize={3}
