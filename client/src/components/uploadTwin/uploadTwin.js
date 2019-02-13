@@ -56,7 +56,7 @@ export default class UploadTwin extends Component {
     }
   };
   render() {
-    const { url, softwareVersion } = this.state;
+    const { url, softwareVersion, updateTwinLoading } = this.state;
     return (
       <div>
         <form onSubmit={this.updateTwin}>
@@ -86,7 +86,7 @@ export default class UploadTwin extends Component {
             />
           </div>
           <button type="submit" className="cust-btn">
-            Update firmware
+            {updateTwinLoading?'Updating Firmware..':'Update firmware'}
           </button>
         </form>
       </div>

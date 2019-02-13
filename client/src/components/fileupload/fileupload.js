@@ -14,8 +14,12 @@ const columns = [{
   accessor: 'name' // String-based value accessors!
 }, {
   Header: 'Download Link',
-  accessor: 'name',
-  Cell: props => <span className='number'>{`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${props.value}`}</span> // Custom cell components!
+  resizable:true,
+  Cell: props =><a href={`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${props.value}`}>Link</a>
+},
+{
+  Header: 'Date',
+  accessor: 'lastModified' 
 }]
 export default class FileUpload extends Component {
   constructor(props) {
@@ -83,16 +87,7 @@ export default class FileUpload extends Component {
         this.setState({ getBlobsLoading: false });
       });
   };
-  showBlob = (blob, index) => {
-    return (
-      <tr key={index}>
-        <td>{blob.name}</td>
-        <td>
-          <span className={`blob-${index}`}>{`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${blob.name}`}</span>
-        </td>
-      </tr>
-    );
-  };
+  
   handleselectedFile = event => {
     event.preventDefault();
     this.setState({ selectedFile: event.target.files[0] });
@@ -108,8 +103,7 @@ export default class FileUpload extends Component {
           loading={getBlobsLoading}
           showPagination={true}
           defaultPageSize={3}
-          resizable={true}
-          sortable={false}
+          width={170}
           loadingText={'Fetching firmwares..'}
           noDataText={'No Firmwares found..'}
         />
