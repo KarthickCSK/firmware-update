@@ -23,3 +23,9 @@
   width: 800px;
   padding: 20px;
 }
+
+.custom-header {
+  background: #337ab7;
+  font-size: 18px;
+  color: white;
+}
