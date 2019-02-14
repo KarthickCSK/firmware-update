@@ -15,6 +15,7 @@ const columns = [{
 }, {
   Header: 'Download Link',
   resizable: true,
+  accessor: 'name',
   Cell: props => <a href={`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${props.value}`}>Link</a>
 },
 {
