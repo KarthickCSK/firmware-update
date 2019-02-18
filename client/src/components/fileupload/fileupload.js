@@ -1,27 +1,37 @@
 import React, { Component } from "react";
-import Update from "../update/update";
 import axios from "axios";
 import ReactTable from "react-table";
-import 'react-table/react-table.css'
+import "react-table/react-table.css";
 import "./fileupload.css";
 const {
   REACT_APP_SERVER,
   REACT_APP_GETBLOBS,
   REACT_APP_UPLOADBLOB
 } = process.env;
-const columns = [{
-  Header: 'Name',
-  accessor: 'name' // String-based value accessors!
-}, {
-  Header: 'Download Link',
-  resizable: true,
-  accessor: 'name',
-  Cell: props => <a href={`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${props.value}`}>Link</a>
-},
-{
-  Header: 'Date',
-  accessor: 'lastModified'
-}]
+const columns = [
+  {
+    Header: "Name",
+    accessor: "name" // String-based value accessors!
+  },
+  {
+    Header: "Download Link",
+    resizable: true,
+    accessor: "name",
+    Cell: props => (
+      <a
+        href={`https://wrdm2chetanpackage.blob.core.windows.net/firmware/${
+          props.value
+        }`}
+      >
+        Link
+      </a>
+    )
+  },
+  {
+    Header: "Date",
+    accessor: "lastModified"
+  }
+];
 export default class FileUpload extends Component {
   constructor(props) {
     super(props);
@@ -96,77 +106,42 @@ export default class FileUpload extends Component {
   render() {
     const { blobs, getBlobsLoading } = this.state;
     return (
-      <div className="container cust-home">
-        <div classname="accordion" id="accordionExample">
-          <div classname="card">
-            <div classname="card-header custom-header" id="headingOne">
-              <h5 classname="mb-0">
-                <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <span classname="fa fa-tasks"></span>
-                  <label><b>&nbsp;&nbsp;Firmwares in blob: </b></label>
-                  <i classname="fa fa-angle-down pull-right"></i>
-                </a>
-              </h5>
+      <div>
+        <ReactTable
+          data={blobs}
+          columns={columns}
+          pageSizeOptions={[3]}
+          loading={getBlobsLoading}
+          showPagination={true}
+          defaultPageSize={3}
+          width={170}
+          loadingText={"Fetching firmwares.."}
+          noDataText={"No Firmwares found.."}
+        />
+        <div className="upload-container">
+          <label>
+            <b>Upload Firmware file to blob: </b>
+          </label>
+          <div className="input-group mb-3">
+            <div className="custom-file">
+              <input
+                id="file"
+                type="file"
+                accept=".gz, .zip"
+                onChange={this.handleselectedFile}
+                name="myFile"
+              />
+              <br />
+              <br />
             </div>
-
-            <div id="collapseOne" classname="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-              <div classname="card-body">
-                <ReactTable
-                  data={blobs}
-                  columns={columns}
-                  pageSizeOptions={[3]}
-                  loading={getBlobsLoading}
-                  showPagination={true}
-                  defaultPageSize={3}
-                  width={170}
-                  loadingText={'Fetching firmwares..'}
-                  noDataText={'No Firmwares found..'}
-                />
-                <div className="upload-container">
-                  <label><b>Upload Firmware file to blob: </b></label>
-                  <div className="input-group mb-3">
-                    <div className="custom-file">
-                      <input
-                        id="file"
-                        type="file"
-                        accept=".gz, .zip"
-                        onChange={this.handleselectedFile}
-                        name="myFile"
-                      />
-                      <br />
-                      <br />
-                    </div>
-                    <div className="input-group-append">
-                      <button
-                        type="button"
-                        className="cust-btn"
-                        onClick={this.uploadFirmware}
-                      >
-                        Upload File
+            <div className="input-group-append">
+              <button
+                type="button"
+                className="cust-btn"
+                onClick={this.uploadFirmware}
+              >
+                Upload File
               </button>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div classname="card">
-            <div classname="card-header custom-header" id="headingTwo">
-              <h5 classname="mb-0">
-                <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <span classname="fa fa-spinner"></span>
-                <label><b>&nbsp;&nbsp;Firmware status: </b></label>
-                <i classname="fa fa-angle-down pull-right"></i>
-                </a>
-              </h5>
-            </div>
-            <div id="collapseTwo" classname="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-              <div classname="card-body">
-
-                <Update />
-
-              </div>
             </div>
           </div>
         </div>

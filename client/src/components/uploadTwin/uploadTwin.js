@@ -9,14 +9,14 @@ export default class UploadTwin extends Component {
     this.state = {
       softwareVersion: "1.0.0.006",
       updateTwinLoading: false,
-      reboot:true,
+      reboot:"True",
       url:
         "https://wrdm2chetanpackage.blob.core.windows.net/wrdm2-package-file-chetan/package.tar.gz"
     };
   }
   updateTwin = e => {
     e.preventDefault();
-    const { softwareVersion, url } = this.state;
+    const { softwareVersion, url, reboot } = this.state;
     if (softwareVersion === "" || url === "") {
       alert("Please enter all the fields");
     } else {
@@ -32,7 +32,8 @@ export default class UploadTwin extends Component {
         },
         data: {
           software_version: softwareVersion,
-          url: url
+          url: url,
+          reboot: reboot
         }
       })
         .then(response => {
@@ -64,11 +65,11 @@ export default class UploadTwin extends Component {
     return (
       <div>
         <form onSubmit={this.updateTwin}>
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="exampleInputEmail1">Software version</label>
             <input
               type="software-version"
-              class="form-control"
+              className="form-control"
               id="software"
               value={softwareVersion}
               name="softwareVersion"
@@ -77,19 +78,19 @@ export default class UploadTwin extends Component {
               onChange={this.handleInput}
             />
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="exampleInputPassword1">Blob URL</label>
             <input
               type="text"
               value={url}
               name="url"
-              class="form-control"
+              className="form-control"
               id="blobUrl"
               placeholder="Enter Blob URL"
               onChange={this.handleInput}
             />
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="rebootType">Reboot</label>
             <select className="form-control" id="rebootType" value={reboot}
               name="reboot" onChange={this.handleInput}>

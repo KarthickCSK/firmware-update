@@ -120,7 +120,7 @@ export default class Update extends Component {
                       <div className="card-body">
                         {firmwareStatuses.length?firmwareStatuses.map((status, index) =>
                           this.showStatus(status, index)
-                        ):<p style={{'text-align': 'center'}}>No records found</p>}
+                        ):<p style={{'textAlign': 'center'}}>No records found</p>}
                       </div>
                       <div className="toogle-footer">
                         <button type="button" className="cust-btn">

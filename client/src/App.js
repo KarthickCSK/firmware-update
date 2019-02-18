@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import FileUpload from './components/fileupload/fileupload';
+import Main from './components/main/main';
 import './App.css';
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" component={FileUpload} />
+            <Route exact path="/" component={Main} />
           </Switch>
         </Router>
       </div>
