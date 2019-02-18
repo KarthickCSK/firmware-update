@@ -56,10 +56,9 @@ export default class UploadTwin extends Component {
   render() {
     const { deviceID, message, logging } = this.state;
     return (
-      <div>
+      <div className="box-it">
         <form onSubmit={this.logMessage}>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Device ID</label>
             <input
               type="text"
               className="form-control"
@@ -71,7 +70,6 @@ export default class UploadTwin extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Message</label>
             <input
               type="text"
               value={message}

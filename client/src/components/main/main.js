@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Reboot from "../reboot/reboot";
+import Log from '../log/log';
 import Update from "../update/update";
 import FileUpload from "../fileupload/fileupload";
 
@@ -96,7 +97,14 @@ export default class Main extends Component {
                 data-parent="#accordionExample"
               >
                 <div className="card-body">
-                  <Reboot />
+                  <div className="row">
+                    <div className="col-6">
+                      <Log />
+                    </div>
+                    <div className="col-6">
+                      <Reboot />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
