@@ -97,21 +97,20 @@ export default class FileUpload extends Component {
     const { blobs, getBlobsLoading } = this.state;
     return (
       <div className="container cust-home">
-        <div class="accordion" id="accordionExample">
-          <div class="card">
-            <div class="card-header custom-header" id="headingOne">
-              <h5 class="mb-0">
+        <div classname="accordion" id="accordionExample">
+          <div classname="card">
+            <div classname="card-header custom-header" id="headingOne">
+              <h5 classname="mb-0">
                 <a data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <span class="fa fa-tasks"></span>
+                  <span classname="fa fa-tasks"></span>
                   <label><b>&nbsp;&nbsp;Firmwares in blob: </b></label>
-                  <i class="fa fa-angle-down pull-right"></i>
+                  <i classname="fa fa-angle-down pull-right"></i>
                 </a>
               </h5>
             </div>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-              <div class="card-body">
-
+            <div id="collapseOne" classname="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div classname="card-body">
                 <ReactTable
                   data={blobs}
                   columns={columns}
@@ -152,18 +151,18 @@ export default class FileUpload extends Component {
               </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card-header custom-header" id="headingTwo">
-              <h5 class="mb-0">
+          <div classname="card">
+            <div classname="card-header custom-header" id="headingTwo">
+              <h5 classname="mb-0">
                 <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <span class="fa fa-spinner"></span>
+                <span classname="fa fa-spinner"></span>
                 <label><b>&nbsp;&nbsp;Firmware status: </b></label>
-                <i class="fa fa-angle-down pull-right"></i>
+                <i classname="fa fa-angle-down pull-right"></i>
                 </a>
               </h5>
             </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-              <div class="card-body">
+            <div id="collapseTwo" classname="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div classname="card-body">
 
                 <Update />
 

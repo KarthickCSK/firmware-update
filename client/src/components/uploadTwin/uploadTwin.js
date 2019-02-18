@@ -9,6 +9,7 @@ export default class UploadTwin extends Component {
     this.state = {
       softwareVersion: "1.0.0.006",
       updateTwinLoading: false,
+      reboot:true,
       url:
         "https://wrdm2chetanpackage.blob.core.windows.net/wrdm2-package-file-chetan/package.tar.gz"
     };
@@ -51,17 +52,20 @@ export default class UploadTwin extends Component {
     if (name === "url") {
       this.setState({ url: value });
     }
+    if (name === "reboot") {
+      this.setState({ reboot: value });
+    }
     if (name === "softwareVersion") {
       this.setState({ softwareVersion: value });
     }
   };
   render() {
-    const { url, softwareVersion, updateTwinLoading } = this.state;
+    const { url, softwareVersion, updateTwinLoading, reboot } = this.state;
     return (
       <div>
         <form onSubmit={this.updateTwin}>
           <div class="form-group">
-            <label for="exampleInputEmail1">Software version</label>
+            <label htmlFor="exampleInputEmail1">Software version</label>
             <input
               type="software-version"
               class="form-control"
@@ -74,7 +78,7 @@ export default class UploadTwin extends Component {
             />
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Blob URL</label>
+            <label htmlFor="exampleInputPassword1">Blob URL</label>
             <input
               type="text"
               value={url}
@@ -84,6 +88,14 @@ export default class UploadTwin extends Component {
               placeholder="Enter Blob URL"
               onChange={this.handleInput}
             />
+          </div>
+          <div class="form-group">
+            <label htmlFor="rebootType">Reboot</label>
+            <select className="form-control" id="rebootType" value={reboot}
+              name="reboot" onChange={this.handleInput}>
+              <option>True</option>
+              <option>False</option>
+            </select>
           </div>
           <button type="submit" className="cust-btn">
             {updateTwinLoading?'Updating Firmware..':'Update firmware'}
